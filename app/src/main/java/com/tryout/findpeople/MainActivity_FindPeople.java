@@ -14,19 +14,21 @@ public class MainActivity_FindPeople extends AppCompatActivity {
     Button button;
     ProgressBar progressBar;
     TextView textView;
-    Extract_FindPeople extract_feed = new Extract_FindPeople();
+    Extract_FindPeople extract_feed = new Extract_FindPeople(); // Reference the class that extracts data using API
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity__find_people);
 
+        // Each of the attributes of the screen/Activity connected to their respective counterparts
         editText = (EditText) findViewById(R.id.edit_emailtext);
         button = (Button) findViewById(R.id.button_search);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         textView = (TextView) findViewById(R.id.text_response);
 
         button.setOnClickListener(new View.OnClickListener() {
+            // upon click on search, Extract_FindPeople is called
             @Override
             public void onClick(View v) {
 
