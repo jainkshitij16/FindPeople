@@ -14,6 +14,7 @@ public class MainActivity_FindPeople extends AppCompatActivity {
     Button button;
     ProgressBar progressBar;
     TextView textView;
+    Extract_FindPeople extract_feed = new Extract_FindPeople();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class MainActivity_FindPeople extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 
