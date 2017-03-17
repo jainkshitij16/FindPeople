@@ -31,11 +31,9 @@ public class MainActivity_FindPeople extends AppCompatActivity {
             // upon click on search, Extract_FindPeople is called
             @Override
             public void onClick(View v) {
-
+                extract_feed.execute();
             }
         });
-
-
     }
 }
 
