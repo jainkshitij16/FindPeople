@@ -4,7 +4,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -53,7 +56,13 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     }
 
     // Converts InputStream to a string for doInBackground
-    private String readStream(InputStream inputStream){
+    private String readStream(InputStream inputStream) throws IOException{
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line = bufferedReader.readLine();
+        for(line != null){
+
+        }
         return null;
     }
 }
