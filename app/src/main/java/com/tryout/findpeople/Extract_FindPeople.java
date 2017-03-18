@@ -2,6 +2,10 @@ package com.tryout.findpeople;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -33,6 +37,7 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     /*
         Parameter matches with Params
         Method states what processes to run in the background
+        Uses readStream return the string
      */
     @Override
     protected String doInBackground(Void... urls) {
@@ -55,14 +60,53 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
         return null;
     }
 
+    // Defines what to do before the request is made
+    protected void onPreExecute() {
+        findPeople.progressBar.setVisibility(View.INVISIBLE);
+        findPeople.textView.setText("");
+    }
+
+    // Defines what to do after the request is accomplished
+    protected void onPostExecute(String response) {
+        if(response==null) response = "There was an error";
+
+        findPeople.progressBar.setVisibility(View.GONE);
+        findPeople.editText.setText("");
+        findPeople.textView.setText(response);
+        /*
+        try{
+            JSONObject jsonObject = new JSONObject()
+        }
+        catch(JSONException e){
+
+        }
+         */
+    }
+
+    // Defines what to do when the request is being processed
+    protected void onProgressUpdate(Void... values) {
+        findPeople.progressBar.setVisibility(View.VISIBLE);
+    }
+
+    // Defines when request is not processed
+    protected void onCancelled() {
+        findPeople.progressBar.setVisibility(View.INVISIBLE);
+        findPeople.textView.setText("Request Cancelled");
+    }
+
+
     // Converts InputStream to a string for doInBackground
+    // Appends strings to each other and returns them together
     private String readStream(InputStream inputStream) throws IOException{
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         String line = bufferedReader.readLine();
-        for(line != null){
-
+        while(line != null){
+            stringBuilder.append(line);
         }
-        return null;
+        inputStream.close();
+        return stringBuilder.toString();
     }
+
+
 }
