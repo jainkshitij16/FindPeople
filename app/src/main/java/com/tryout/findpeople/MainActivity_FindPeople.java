@@ -14,10 +14,11 @@ public class MainActivity_FindPeople extends AppCompatActivity {
     Button button;
     ProgressBar progressBar;
     TextView textView;
-    Extract_FindPeople extract_feed = new Extract_FindPeople(); // Reference the class that extracts data using API
+    Extract_FindPeople extract_feed; // Reference the class that extracts data using API
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        extract_feed = new Extract_FindPeople();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity__find_people);
 

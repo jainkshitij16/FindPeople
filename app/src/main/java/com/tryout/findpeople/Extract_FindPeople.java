@@ -4,9 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -63,7 +60,6 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     // Defines what to do before the request is made
     protected void onPreExecute() {
         findPeople.progressBar.setVisibility(View.INVISIBLE);
-        findPeople.textView.setText("");
     }
 
     // Defines what to do after the request is accomplished
