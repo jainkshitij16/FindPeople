@@ -20,8 +20,7 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     private static final String API_URL = "https://api.fullcontact.com/v2/person.json?";
     private static final String API_EMAIL_ = "email="; // Look up by email
     private static final String API_PHONE = "phone="; // Look up by phone
-    MainActivity_FindPeople findPeople = new MainActivity_FindPeople();
-    String user_email = findPeople.editText.toString();
+    MainActivity_FindPeople findPeople;
 /*
     AsyncTask class requires following methods
     Params; type of parameter sent to the task upon execution
@@ -30,6 +29,10 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
 
     *Use Void if one of them don't have any primitive or objects*
  */
+
+    public Extract_FindPeople(){
+        findPeople = new MainActivity_FindPeople();
+    }
 
     /*
         Parameter matches with Params
@@ -40,7 +43,7 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     protected String doInBackground(Void... urls) {
         try{
             // Making a call to the API and lookup using email
-            URL url = new URL(API_URL+API_EMAIL_+user_email+API_KEY);
+            URL url = new URL(API_URL+API_EMAIL_+findPeople.editText+API_KEY);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             try{
                 // Standard process for android for handling https request.
@@ -55,11 +58,6 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
             Log.e(e.getMessage(),"URL not found");
         }
         return null;
-    }
-
-    // Defines what to do before the request is made
-    protected void onPreExecute() {
-        findPeople.progressBar.setVisibility(View.INVISIBLE);
     }
 
     // Defines what to do after the request is accomplished
@@ -78,18 +76,6 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
         }
          */
     }
-
-    // Defines what to do when the request is being processed
-    protected void onProgressUpdate(Void... values) {
-        findPeople.progressBar.setVisibility(View.VISIBLE);
-    }
-
-    // Defines when request is not processed
-    protected void onCancelled() {
-        findPeople.progressBar.setVisibility(View.INVISIBLE);
-        findPeople.textView.setText("Request Cancelled");
-    }
-
 
     // Converts InputStream to a string for doInBackground
     // Appends strings to each other and returns them together
