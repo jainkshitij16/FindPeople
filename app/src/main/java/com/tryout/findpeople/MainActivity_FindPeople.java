@@ -1,5 +1,6 @@
 package com.tryout.findpeople;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,9 +17,10 @@ public class MainActivity_FindPeople extends AppCompatActivity {
     TextView textView;
     Extract_FindPeople extract_feed; // Reference the class that extracts data using API
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        extract_feed = new Extract_FindPeople();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity__find_people);
 
@@ -27,6 +29,7 @@ public class MainActivity_FindPeople extends AppCompatActivity {
         button = (Button) findViewById(R.id.button_search);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         textView = (TextView) findViewById(R.id.text_response);
+        extract_feed = new Extract_FindPeople();
 
         button.setOnClickListener(new View.OnClickListener() {
             // upon click on search, Extract_FindPeople is called
@@ -36,6 +39,7 @@ public class MainActivity_FindPeople extends AppCompatActivity {
             }
         });
     }
+
 }
 
 
