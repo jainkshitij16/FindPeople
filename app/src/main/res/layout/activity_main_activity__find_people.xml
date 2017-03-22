@@ -32,7 +32,7 @@
         android:id="@+id/progressBar"
         android:layout_marginTop="38dp"
         android:indeterminate="false"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:layout_below="@+id/button_search"
         android:layout_centerHorizontal="true" />
 
