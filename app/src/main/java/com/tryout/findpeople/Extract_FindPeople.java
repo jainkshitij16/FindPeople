@@ -1,8 +1,13 @@
 package com.tryout.findpeople;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -32,6 +37,7 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
 
     public Extract_FindPeople(){
         findPeople = new MainActivity_FindPeople();
+        setValue_URL(findPeople);
     }
 
 
@@ -94,6 +100,13 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
         }
         inputStream.close();
         return stringBuilder.toString();
+    }
+
+    // Initializing values for the layout fields from MainActivity.onCreate
+    private void setValue_URL (MainActivity_FindPeople findPeople){
+         findPeople.editText = (EditText) findPeople.findViewById(R.id.edit_emailtext);
+        findPeople.progressBar = (ProgressBar) findPeople.findViewById(R.id.progressBar);
+        findPeople.textView = (TextView) findPeople.findViewById(R.id.text_response);
     }
 
 
