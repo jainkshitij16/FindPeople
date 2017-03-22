@@ -34,6 +34,12 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
         findPeople = new MainActivity_FindPeople();
     }
 
+
+    protected void onPreExecute() {
+        findPeople.progressBar.setVisibility(View.VISIBLE);
+        findPeople.textView.setText("");
+    }
+
     /*
         Parameter matches with Params
         Method states what processes to run in the background
