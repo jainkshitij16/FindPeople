@@ -59,7 +59,7 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             try{
                 // Standard process for android for handling https request.
-                // Look at Git-hub for improved process
+                // Look at Git-hub for improved process.
                 InputStream inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
                 readStream(inputStream);
             }
