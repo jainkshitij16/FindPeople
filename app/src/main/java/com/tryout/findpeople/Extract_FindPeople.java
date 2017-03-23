@@ -1,13 +1,8 @@
 package com.tryout.findpeople;
 
-import android.content.Intent;
+
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -21,11 +16,12 @@ import java.net.URL;
  * Created by Kshitij on 2017-03-16.
  */
 public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
-    private static final String API_KEY = "&apiKey=86bc2cd8905ee179";
+    private static final String API_KEY = "apiKey=86bc2cd8905ee179";
     private static final String API_URL = "https://api.fullcontact.com/v2/person.json?";
-    private static final String API_EMAIL_ = "email="; // Look up by email
+    private static final String API_EMAIL = "&email="; // Look up by email
     private static final String API_PHONE = "phone="; // Look up by phone
-    MainActivity_FindPeople findPeople;
+    private String email;
+    private MainActivity_FindPeople myActivity;
 /*
     AsyncTask class requires following methods
     Params; type of parameter sent to the task upon execution
@@ -35,16 +31,11 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     *Use Void if one of them don't have any primitive or objects*
  */
 
-    public Extract_FindPeople(){
-        findPeople = new MainActivity_FindPeople();
-        setValue_URL(findPeople);
+    public Extract_FindPeople(MainActivity_FindPeople act, String email){
+        myActivity = act;
+        this.email = email;
     }
 
-
-    protected void onPreExecute() {
-        findPeople.progressBar.setVisibility(View.VISIBLE);
-        findPeople.textView.setText("");
-    }
 
     /*
         Parameter matches with Params
@@ -55,7 +46,9 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     protected String doInBackground(Void... urls) {
         try{
             // Making a call to the API and lookup using email
-            URL url = new URL(API_URL+API_EMAIL_+findPeople.editText+API_KEY);
+            String u = API_URL + API_KEY + API_EMAIL + email;
+            System.out.println(u);
+            URL url = new URL(u);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             try{
                 // Standard process for android for handling https request.
@@ -75,18 +68,7 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     // Defines what to do after the request is accomplished
     protected void onPostExecute(String response) {
         if(response==null) response = "There was an error";
-
-        findPeople.progressBar.setVisibility(View.GONE);
-        findPeople.editText.setText("");
-        findPeople.textView.setText(response);
-        /*
-        try{
-            JSONObject jsonObject = new JSONObject()
-        }
-        catch(JSONException e){
-
-        }
-         */
+        myActivity.displayDetails(response);
     }
 
     // Converts InputStream to a string for doInBackground
@@ -101,13 +83,5 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
         inputStream.close();
         return stringBuilder.toString();
     }
-
-    // Initializing values for the layout fields from MainActivity.onCreate
-    private void setValue_URL (MainActivity_FindPeople findPeople){
-         findPeople.editText = (EditText) findPeople.findViewById(R.id.edit_emailtext);
-        findPeople.progressBar = (ProgressBar) findPeople.findViewById(R.id.progressBar);
-        findPeople.textView = (TextView) findPeople.findViewById(R.id.text_response);
-    }
-
 
 }
