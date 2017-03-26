@@ -6,6 +6,8 @@ package com.tryout.findpeople;
 
 public class Person {
 
+    //@TODO: forms a person using the contacts, websites,name, organization, social profiles
+
     private static Person person = new Person();
 
     /*
@@ -17,5 +19,7 @@ public class Person {
 
     private Person(){
     }
+
+
 
 }

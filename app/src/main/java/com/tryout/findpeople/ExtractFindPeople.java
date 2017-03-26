@@ -4,6 +4,9 @@ package com.tryout.findpeople;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,14 +18,16 @@ import java.net.URL;
 /**
  * Created by Kshitij on 2017-03-16.
  */
-public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
+public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
 
     private static final String API_KEY = "apiKey=86bc2cd8905ee179";
     private static final String API_URL = "https://api.fullcontact.com/v2/person.json?";
     private static final String API_EMAIL = "&email="; // Look up by email
     private static final String API_PHONE = "phone="; // Look up by phone
     private String email;
-    private MainActivity_FindPeople myActivity;
+    private MainActivityFindPeople myActivity;
+
+
 
 /*
     AsyncTask class requires following methods
@@ -33,7 +38,7 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     *Use Void if one of them don't have any primitive or objects*
  */
 
-    public Extract_FindPeople(MainActivity_FindPeople act, String email){
+    public ExtractFindPeople(MainActivityFindPeople act, String email){
         myActivity = act;
         this.email = email;
     }
@@ -88,7 +93,9 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
     }
 
     // Parses the string into Person
-    public Person JSONParsers(String response){
+    public Person JSONParsers(String response) throws JSONException{
+        JSONObject jsonObject = new JSONObject(response);
+
         return null;
     }
 

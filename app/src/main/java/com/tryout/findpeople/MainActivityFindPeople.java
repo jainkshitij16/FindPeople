@@ -8,18 +8,18 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class MainActivity_FindPeople extends AppCompatActivity {
+public class MainActivityFindPeople extends AppCompatActivity {
 
     EditText editText;
     Button button;
     ProgressBar progressBar;
     TextView textView;
-    Extract_FindPeople extract_feed; // Reference the class that extracts data using API
+    ExtractFindPeople extract_feed; // Reference the class that extracts data using API
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_activity__find_people);
+        setContentView(R.layout.activity_mainactivity_findpeople);
 
         // Each of the attributes of the screen/Activity connected to their respective counterparts
         editText = (EditText) findViewById(R.id.edit_emailtext);
@@ -32,7 +32,7 @@ public class MainActivity_FindPeople extends AppCompatActivity {
             public void onClick(View v) {
 //                progressBar.setVisibility(View.VISIBLE);
 //                textView.setText("")
-                extract_feed = new Extract_FindPeople(MainActivity_FindPeople.this, editText.getText().toString());
+                extract_feed = new ExtractFindPeople(MainActivityFindPeople.this, editText.getText().toString());
                 extract_feed.execute();
             }
         });
