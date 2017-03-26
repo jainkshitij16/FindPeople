@@ -11,26 +11,26 @@ public class ContactinfoPerson {
     private String first_name;
     private String last_name;
     private String full_name;
-    private ChatPerson chatPerson;
-    private WebsitePerson websitePerson;
-    public List<ChatPerson> chatPersonList;
-    public List<WebsitePerson> websitePersonList;
+    private ChatContact chatContact;
+    private WebsiteContact websiteContact;
+    public List<ChatContact> chatContactList;
+    public List<WebsiteContact> websiteContactList;
 
-    public ContactinfoPerson(ChatPerson chatPerson){
-        this.chatPerson = chatPerson;
-        chatPersonList = new ArrayList<>();
-        websitePersonList = new ArrayList<>();
+    public ContactinfoPerson(ChatContact chatContact){
+        this.chatContact = chatContact;
+        chatContactList = new ArrayList<>();
+        websiteContactList = new ArrayList<>();
     }
 
-    public ContactinfoPerson(WebsitePerson websitePerson){
-        this.websitePerson = websitePerson;
-        chatPersonList = new ArrayList<>();
-        websitePersonList = new ArrayList<>();
+    public ContactinfoPerson(WebsiteContact websiteContact){
+        this.websiteContact = websiteContact;
+        chatContactList = new ArrayList<>();
+        websiteContactList = new ArrayList<>();
     }
 
     public ContactinfoPerson(){
-        chatPersonList = new ArrayList<>();
-        websitePersonList = new ArrayList<>();
+        chatContactList = new ArrayList<>();
+        websiteContactList = new ArrayList<>();
     }
 
     public String getFirst_name() {
@@ -57,19 +57,19 @@ public class ContactinfoPerson {
         this.full_name = full_name;
     }
 
-    public ChatPerson getChatPerson() {
-        return chatPerson;
+    public ChatContact getChatContact() {
+        return chatContact;
     }
 
-    public void setChatPerson(ChatPerson chatPerson) {
-        this.chatPerson = chatPerson;
+    public void setChatContact(ChatContact chatContact) {
+        this.chatContact = chatContact;
     }
 
-    public WebsitePerson getWebsitePerson() {
-        return websitePerson;
+    public WebsiteContact getWebsiteContact() {
+        return websiteContact;
     }
 
-    public void setWebsitePerson(WebsitePerson websitePerson) {
-        this.websitePerson = websitePerson;
+    public void setWebsiteContact(WebsiteContact websiteContact) {
+        this.websiteContact = websiteContact;
     }
 }

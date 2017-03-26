@@ -26,6 +26,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
     private static final String API_PHONE = "phone="; // Look up by phone
     private String email;
     private MainActivityFindPeople myActivity;
+    public Person person;
 
 
 
@@ -41,6 +42,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
     public ExtractFindPeople(MainActivityFindPeople act, String email){
         myActivity = act;
         this.email = email;
+        person = Person.getInstance();
     }
 
 
@@ -98,9 +100,11 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         Makes Person with all available attributes; checks for all attributes
      */
     // @TODO: Make the 'person' with attributes using setters since one instance
-    // @TODO: Check if the given attributes are given
+    // @TODO: Check the status of the response first
+
     public Person JSONParsers(String response) throws JSONException{
         JSONObject jsonObject = new JSONObject(response);
+        
 
         return null;
     }

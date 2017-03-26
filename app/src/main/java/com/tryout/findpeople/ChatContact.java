@@ -3,11 +3,11 @@ package com.tryout.findpeople;
 /**
  * Created by Kshitij on 2017-03-26.
  */
-public class ChatPerson {
+public class ChatContact {
     private String client;
     private String handle;
 
-    public ChatPerson(String client, String handle){
+    public ChatContact(String client, String handle){
         this.client = client;
         this.handle = handle;
     }

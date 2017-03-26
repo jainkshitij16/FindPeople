@@ -9,13 +9,12 @@ import java.util.List;
 
 public class Person {
 
-    //@TODO: should have a list of digital footprint
-
     private static Person person = new Person();
     public List<OrganizationPerson> organizationPersonList;
     public ContactinfoPerson contactinfoPerson;
     public List<SocialprofilePerson> socialprofilePersonList;
     public DemographicPerson demographicPerson;
+    public DigitalFootPerson digitalFootPerson;
 
 
     /*
@@ -30,8 +29,7 @@ public class Person {
         contactinfoPerson = new ContactinfoPerson();
         socialprofilePersonList = new ArrayList<>();
         demographicPerson = new DemographicPerson();
+        digitalFootPerson = new DigitalFootPerson();
     }
-
-
 
 }
