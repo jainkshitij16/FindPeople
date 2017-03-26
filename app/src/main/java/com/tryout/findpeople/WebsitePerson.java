@@ -5,7 +5,7 @@ package com.tryout.findpeople;
  */
 public class WebsitePerson {
 
-    public String website;
+    private String website;
 
     /*
         URL are Strings; can be converted to URL for redirecting to website upon a request

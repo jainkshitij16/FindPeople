@@ -92,7 +92,13 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         return stringBuilder.toString();
     }
 
-    // Parses the string into Person
+    /*
+        Parses the string into Person
+        Only response 200 is carried forward; rest fails
+        Makes Person with all available attributes; checks for all attributes
+     */
+    // @TODO: Make the 'person' with attributes using setters since one instance
+    // @TODO: Check if the given attributes are given
     public Person JSONParsers(String response) throws JSONException{
         JSONObject jsonObject = new JSONObject(response);
 

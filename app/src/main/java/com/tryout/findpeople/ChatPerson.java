@@ -4,8 +4,8 @@ package com.tryout.findpeople;
  * Created by Kshitij on 2017-03-26.
  */
 public class ChatPerson {
-    String client;
-    String handle;
+    private String client;
+    private String handle;
 
     public ChatPerson(String client, String handle){
         this.client = client;

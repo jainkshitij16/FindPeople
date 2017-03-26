@@ -8,11 +8,11 @@ import java.util.List;
  */
 public class ContactinfoPerson {
 
-    public String first_name;
-    public String last_name;
-    public String full_name;
-    public ChatPerson chatPerson;
-    public WebsitePerson websitePerson;
+    private String first_name;
+    private String last_name;
+    private String full_name;
+    private ChatPerson chatPerson;
+    private WebsitePerson websitePerson;
     public List<ChatPerson> chatPersonList;
     public List<WebsitePerson> websitePersonList;
 
