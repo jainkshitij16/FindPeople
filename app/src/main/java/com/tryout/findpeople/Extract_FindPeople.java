@@ -16,12 +16,14 @@ import java.net.URL;
  * Created by Kshitij on 2017-03-16.
  */
 public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
+
     private static final String API_KEY = "apiKey=86bc2cd8905ee179";
     private static final String API_URL = "https://api.fullcontact.com/v2/person.json?";
     private static final String API_EMAIL = "&email="; // Look up by email
     private static final String API_PHONE = "phone="; // Look up by phone
     private String email;
     private MainActivity_FindPeople myActivity;
+
 /*
     AsyncTask class requires following methods
     Params; type of parameter sent to the task upon execution
@@ -41,14 +43,15 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
         Parameter matches with Params
         Method states what processes to run in the background
         Uses readStream return the string
+        @Request: https://api.fullcontact.com/v2/person.json?apiKey=86bc2cd8905ee179&email=
      */
     @Override
     protected String doInBackground(Void... urls) {
         try{
             // Making a call to the API and lookup using email
-            String u = API_URL + API_KEY + API_EMAIL + email;
-            System.out.println(u);
-            URL url = new URL(u);
+            String url_request = API_URL + API_KEY + API_EMAIL + email;
+            System.out.println(url_request);
+            URL url = new URL(url_request);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             try{
                 // Standard process for android for handling https request.
@@ -82,6 +85,11 @@ public class Extract_FindPeople extends AsyncTask<Void,Void,String> {
         }
         inputStream.close();
         return stringBuilder.toString();
+    }
+
+    // Parses the string into Person
+    public Person JSONParsers(String response){
+        return null;
     }
 
 }
