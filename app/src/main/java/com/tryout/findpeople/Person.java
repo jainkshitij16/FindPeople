@@ -15,6 +15,7 @@ public class Person {
     public List<OrganizationPerson> organizationPersonList;
     public ContactinfoPerson contactinfoPerson;
     public List<SocialprofilePerson> socialprofilePersonList;
+    public DemographicPerson demographicPerson;
 
 
     /*
@@ -28,6 +29,7 @@ public class Person {
         organizationPersonList = new ArrayList<>();
         contactinfoPerson = new ContactinfoPerson();
         socialprofilePersonList = new ArrayList<>();
+        demographicPerson = new DemographicPerson();
     }
 
 
