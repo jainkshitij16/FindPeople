@@ -9,11 +9,12 @@ import java.util.List;
 
 public class Person {
 
-    //@TODO: forms a person using the contacts, websites,name, organization, social profiles
-    //@TODO: should have a list of social profiles and digital footprint
+    //@TODO: should have a list of digital footprint
 
     private static Person person = new Person();
     public List<OrganizationPerson> organizationPersonList;
+    public ContactinfoPerson contactinfoPerson;
+    public List<SocialprofilePerson> socialprofilePersonList;
 
 
     /*
@@ -25,6 +26,8 @@ public class Person {
 
     private Person(){
         organizationPersonList = new ArrayList<>();
+        contactinfoPerson = new ContactinfoPerson();
+        socialprofilePersonList = new ArrayList<>();
     }
 
 
