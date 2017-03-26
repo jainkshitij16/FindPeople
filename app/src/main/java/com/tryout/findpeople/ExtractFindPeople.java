@@ -4,6 +4,7 @@ package com.tryout.findpeople;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,6 +28,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
     private String email;
     private MainActivityFindPeople myActivity;
     public Person person;
+    public ContactinfoPerson contactinfoPerson;
 
 
 
@@ -43,6 +45,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         myActivity = act;
         this.email = email;
         person = Person.getInstance();
+        contactinfoPerson = new ContactinfoPerson();
     }
 
 
@@ -104,9 +107,28 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
 
     public Person JSONParsers(String response) throws JSONException{
         JSONObject jsonObject = new JSONObject(response);
-        
+        if (jsonObject.getInt("status") == 200){
+            if(jsonObject.has("contactInfo")) Contact_JSONParse(jsonObject.getJSONObject("contactInfo"));
+        }
 
         return null;
+    }
+
+    /*
+       @TODO: Use conditions to check whether the object is present and iterate over them
+
+       Parses the Json object for Contact
+     */
+    private void Contact_JSONParse(JSONObject jsonObject) throws JSONException{
+        contactinfoPerson.setLast_name(jsonObject.getString("familyName"));
+        contactinfoPerson.setFull_name(jsonObject.getString("fullName"));
+        contactinfoPerson.setFirst_name(jsonObject.getString("givenName"));
+
+        JSONArray json_chat = jsonObject.getJSONArray("chats");
+        for(int i=0;i < json_chat.length(); i++){
+            JSONObject chats_objects = json_chat.getJSONObject(i);
+
+        }
     }
 
 }
