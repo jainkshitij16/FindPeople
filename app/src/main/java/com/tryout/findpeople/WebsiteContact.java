@@ -10,7 +10,7 @@ public class WebsiteContact {
     /*
         URL are Strings; can be converted to URL for redirecting to website upon a request
      */
-    public WebsiteContact(String website) {
+    public WebsiteContact(String URL) {
         this.website = website;
     }
 

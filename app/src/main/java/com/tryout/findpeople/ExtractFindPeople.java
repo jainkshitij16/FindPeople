@@ -21,7 +21,7 @@ import java.net.URL;
  */
 public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
 
-    private static final String API_KEY = "apiKey=86bc2cd8905ee179";
+    private static final String API_KEY = "apiKey=ff17c55d4e74b27a";
     private static final String API_URL = "https://api.fullcontact.com/v2/person.json?";
     private static final String API_EMAIL = "&email="; // Look up by email
     private static final String API_PHONE = "phone="; // Look up by phone
@@ -79,6 +79,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
     }
 
     // Defines what to do after the request is accomplished
+    // TODO: Parse here and then pass as person
     protected void onPostExecute(String response) {
         if(response==null) response = "There was an error";
         myActivity.displayDetails(response);
@@ -103,32 +104,44 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         Makes Person with all available attributes; checks for all attributes
      */
     // @TODO: Make the 'person' with attributes using setters since one instance
-    // @TODO: Check the status of the response first
 
     public Person JSONParsers(String response) throws JSONException{
         JSONObject jsonObject = new JSONObject(response);
         if (jsonObject.getInt("status") == 200){
             if(jsonObject.has("contactInfo")) Contact_JSONParse(jsonObject.getJSONObject("contactInfo"));
+            
         }
 
-        return null;
+        return person;
     }
 
     /*
-       @TODO: Use conditions to check whether the object is present and iterate over them
-
        Parses the Json object for Contact
      */
-    private void Contact_JSONParse(JSONObject jsonObject) throws JSONException{
+    private void Contact_JSONParse(JSONObject jsonObject) throws JSONException {
         contactinfoPerson.setLast_name(jsonObject.getString("familyName"));
         contactinfoPerson.setFull_name(jsonObject.getString("fullName"));
         contactinfoPerson.setFirst_name(jsonObject.getString("givenName"));
 
-        JSONArray json_chat = jsonObject.getJSONArray("chats");
-        for(int i=0;i < json_chat.length(); i++){
-            JSONObject chats_objects = json_chat.getJSONObject(i);
-
+        // JSON parsing for Chats in the contact information
+        if (jsonObject.has("chats")) {
+            JSONArray json_chats = jsonObject.getJSONArray("chats");
+            for (int i = 0; i < json_chats.length(); i++) {
+                JSONObject chat_object = json_chats.getJSONObject(i);
+                ChatContact chatContact = new ChatContact(chat_object.getString("client"),chat_object.getString("handle"));
+                contactinfoPerson.chatContactList.add(chatContact);
+            }
         }
+        // JSON parsing for Websites in the contact information
+        if(jsonObject.has("websites")){
+            JSONArray json_websites = jsonObject.getJSONArray("websites");
+            for(int i = 0; i < json_websites.length(); i++){
+                JSONObject website_object = json_websites.getJSONObject(i);
+                WebsiteContact websiteContact = new WebsiteContact(website_object.getString("url"));
+                contactinfoPerson.websiteContactList.add(websiteContact);
+            }
+        }
+        person.setContactinfoPerson(contactinfoPerson);
     }
 
 }

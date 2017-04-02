@@ -37,7 +37,7 @@ public class MainActivityFindPeople extends AppCompatActivity {
             }
         });
     }
-
+        // @TODO: Should display person on the map
     public void displayDetails(String s){
         // System.out.println(response);
         // findPeople.progressBar.setVisibility(View.GONE);
