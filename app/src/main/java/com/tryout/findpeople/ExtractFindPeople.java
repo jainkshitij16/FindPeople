@@ -2,6 +2,7 @@ package com.tryout.findpeople;
 
 
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -60,7 +61,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         try{
             // Making a call to the API and lookup using email
             String url_request = API_URL + API_KEY + API_EMAIL + email;
-            System.out.println(url_request);
+           // System.out.println(url_request); Testing from console by printing
             URL url = new URL(url_request);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             try{
@@ -79,7 +80,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
     }
 
     // Defines what to do after the request is accomplished
-    // TODO: Parse here and then pass as person
+    // TODO: pass as person
     protected void onPostExecute(String response) {
         if(response==null) response = "There was an error";
         myActivity.displayDetails(response);
@@ -109,7 +110,8 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         JSONObject jsonObject = new JSONObject(response);
         if (jsonObject.getInt("status") == 200){
             if(jsonObject.has("contactInfo")) Contact_JSONParse(jsonObject.getJSONObject("contactInfo"));
-            
+            if(jsonObject.has("organizations")) Organizations_JSONParse(jsonObject.getJSONArray("organizations"));
+
         }
 
         return person;
@@ -142,6 +144,30 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
             }
         }
         person.setContactinfoPerson(contactinfoPerson);
+    }
+
+    /*
+        Parses the Json object for Organizations
+     */
+    private void Organizations_JSONParse(JSONArray jsonArray) throws JSONException{
+        for(int i = 0; i < jsonArray.length(); i++){
+            Organisation_JSONParse(jsonArray.getJSONObject(i));
+        }
+    }
+
+    /*
+        Parses the Json object for Organization
+     */
+    private void Organisation_JSONParse(JSONObject jsonObject) throws JSONException{
+        OrganizationPerson organization = new OrganizationPerson(jsonObject.getString("name"));
+        organization.setCurrent_org(jsonObject.getBoolean("current"));
+        organization.setPrimary_org(jsonObject.getBoolean("isPrimary"));
+        organization.setStDate_org(jsonObject.getString("startDate"));
+
+        if(jsonObject.has("endDate")){
+            organization.setEdDate_org("endDate");
+        }
+        person.organizationPersonList.add(organization);
     }
 
 }

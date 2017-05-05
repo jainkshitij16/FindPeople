@@ -37,19 +37,9 @@ public class MainActivityFindPeople extends AppCompatActivity {
             }
         });
     }
-        // @TODO: Should display person on the map
-    public void displayDetails(String s){
-        // System.out.println(response);
-        // findPeople.progressBar.setVisibility(View.GONE);
-        // findPeople.textView.setText(response);
-        /*
-        try{
-            JSONObject jsonObject = new JSONObject()
-        }
-        catch(JSONException e){
 
-        }
-         */
+    // TODO: Display details in the list view
+    public void displayDetails(String s){
         textView.setText(s);
     }
 
