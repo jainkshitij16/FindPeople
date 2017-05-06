@@ -7,9 +7,18 @@ public class DemographicPerson {
 
     private String gender_person;
     private String location_person;
+    private int age;
 
     public DemographicPerson(){
 
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getGender_person() {

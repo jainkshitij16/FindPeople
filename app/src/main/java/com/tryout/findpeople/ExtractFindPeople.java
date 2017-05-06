@@ -111,6 +111,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         if (jsonObject.getInt("status") == 200){
             if(jsonObject.has("contactInfo")) Contact_JSONParse(jsonObject.getJSONObject("contactInfo"));
             if(jsonObject.has("organizations")) Organizations_JSONParse(jsonObject.getJSONArray("organizations"));
+            if(jsonObject.has("demographics")) Demographics_JSONParse(jsonObject.getJSONObject("demographics"));
 
         }
 
@@ -164,10 +165,22 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         organization.setPrimary_org(jsonObject.getBoolean("isPrimary"));
         organization.setStDate_org(jsonObject.getString("startDate"));
 
-        if(jsonObject.has("endDate")){
-            organization.setEdDate_org("endDate");
-        }
+        if(jsonObject.has("endDate")) organization.setEdDate_org(jsonObject.getString("endDate"));
+
         person.organizationPersonList.add(organization);
+    }
+
+    /*
+        Parses the Json object for Demographics
+     */
+    private void Demographics_JSONParse(JSONObject jsonObject) throws JSONException{
+        DemographicPerson demographicPerson = new DemographicPerson();
+        demographicPerson.setLocation_person(jsonObject.getString("locationGeneral"));
+
+        if(jsonObject.has("age")) demographicPerson.setAge(jsonObject.getInt("age"));
+        if(jsonObject.has("gender")) demographicPerson.setGender_person(jsonObject.getString("gender"));
+
+        person.setDemographicPerson(demographicPerson);
     }
 
 }
