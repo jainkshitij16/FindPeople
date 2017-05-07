@@ -113,6 +113,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
             if(jsonObject.has("organizations")) Organizations_JSONParse(jsonObject.getJSONArray("organizations"));
             if(jsonObject.has("demographics")) Demographics_JSONParse(jsonObject.getJSONObject("demographics"));
             if(jsonObject.has("socialProfiles")) SocialProfiles_JSONParse(jsonObject.getJSONArray("socialProfiles"));
+            if(jsonObject.has("digitalFootprint")) Digitscores_JSONParse(jsonObject.getJSONObject("digitalFootprint"));
 
         }
 
@@ -206,6 +207,34 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         person.socialprofilePersonList.add(socialprofilePerson);
 
     }
+    /*
+        Parses the Json array for digital score and uses a helper to parse one record
+     */
+    private void Digitscores_JSONParse(JSONObject jsonObject) throws JSONException{
+        DigitalFootPerson digitalFootPerson = new DigitalFootPerson();
+        if(jsonObject.has("scores")){
+            ScoreDigital scoreDigital = new ScoreDigital();
+            JSONArray jsonArray = jsonObject.getJSONArray("scores");
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                scoreDigital.setName_score(jsonObject1.getString("provider"));
+                scoreDigital.setValue_score(jsonObject1.getInt("value"));
+                digitalFootPerson.scoreDigitalList.add(scoreDigital);
+            }
+        }
 
-    
+        if(jsonObject.has("topics")){
+            TopicDigital topicDigital = new TopicDigital();
+            JSONArray jsonArray = jsonObject.getJSONArray("topics");
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                topicDigital.setProvider_topic(jsonObject1.getString("provider"));
+                topicDigital.setValue_topic(jsonObject1.getString("value"));
+                digitalFootPerson.topicDigitalList.add(topicDigital);
+            }
+        }
+
+        person.setDigitalFootPerson(digitalFootPerson);
+    }
+
 }

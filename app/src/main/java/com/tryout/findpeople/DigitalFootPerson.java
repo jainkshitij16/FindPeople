@@ -9,8 +9,8 @@ import java.util.List;
 public class DigitalFootPerson {
     private ScoreDigital scoreDigital;
     private TopicDigital topicDigital;
-    private List<ScoreDigital> scoreDigitalList;
-    private List<TopicDigital> topicDigitalList;
+    public List<ScoreDigital> scoreDigitalList;
+    public List<TopicDigital> topicDigitalList;
 
 
     public DigitalFootPerson(){
