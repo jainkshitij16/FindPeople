@@ -112,6 +112,7 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
             if(jsonObject.has("contactInfo")) Contact_JSONParse(jsonObject.getJSONObject("contactInfo"));
             if(jsonObject.has("organizations")) Organizations_JSONParse(jsonObject.getJSONArray("organizations"));
             if(jsonObject.has("demographics")) Demographics_JSONParse(jsonObject.getJSONObject("demographics"));
+            if(jsonObject.has("socialProfiles")) SocialProfiles_JSONParse(jsonObject.getJSONArray("socialProfiles"));
 
         }
 
@@ -183,4 +184,28 @@ public class ExtractFindPeople extends AsyncTask<Void,Void,String> {
         person.setDemographicPerson(demographicPerson);
     }
 
+    /*
+        Parses the Json array for social and uses helper for one social profile
+     */
+    private void SocialProfiles_JSONParse(JSONArray jsonArray) throws JSONException{
+        for(int i=0; i<jsonArray.length(); i++){
+            SocialProfile_JSONParse(jsonArray.getJSONObject(i));
+        }
+    }
+
+    private void SocialProfile_JSONParse(JSONObject jsonObject) throws JSONException{
+        SocialprofilePerson socialprofilePerson = new SocialprofilePerson();
+
+        if(jsonObject.has("bio")) socialprofilePerson.setBio_socialprofile(jsonObject.getString("bio"));
+        if(jsonObject.has("followers")) socialprofilePerson.setFollowers_socialprofile(jsonObject.getInt("followers"));
+        if(jsonObject.has("following")) socialprofilePerson.setFollowing_socialprofile(jsonObject.getInt("following"));
+        if(jsonObject.has("type")) socialprofilePerson.setName_socialprofile(jsonObject.getString("type"));
+        if(jsonObject.has("username")) socialprofilePerson.setUsernm_socialprofile(jsonObject.getString("username"));
+        if(jsonObject.has("url")) socialprofilePerson.setUrl_socialprofile(jsonObject.getString("url"));
+
+        person.socialprofilePersonList.add(socialprofilePerson);
+
+    }
+
+    
 }
